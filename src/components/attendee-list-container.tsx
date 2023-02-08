@@ -18,12 +18,6 @@ export default function ListContainer() {
     return <ErrorComponent error={error} />
   }
 
-  if (loading) {
-    return <CircularProgress className={Styles.loaderClass} />
-  }
-  if (error) {
-    return <ErrorComponent error={error} />
-  }
   return (
     <div className={Styles.listContainer}>
       {listData.map((listItem) => (
