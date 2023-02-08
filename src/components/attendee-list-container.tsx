@@ -1,6 +1,6 @@
 import Styles from '../Styles/components/list-container.module.scss'
 import useApiGet from '../helpers/hooks/use-api-get'
-import ListElement from './list-element'
+import ListElement from './attendee-list-element'
 import { Tasks } from '../constants/tasks.enum'
 import { getApiForTask } from '../helpers/api-helper'
 import { IResidentList, IProgramList } from '../interfaces'
