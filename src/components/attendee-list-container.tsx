@@ -1,21 +1,22 @@
 import Styles from '../Styles/components/list-container.module.scss'
 import useApiGet from '../helpers/hooks/use-api-get'
 import ListElement from './attendee-list-element'
-import { Tasks } from '../constants/tasks.enum'
-import { getApiForTask } from '../helpers/api-helper'
-import { IResidentList, IProgramList } from '../interfaces'
+import { IProgramList } from '../interfaces'
 import CircularProgress from '@mui/material/CircularProgress'
 import ErrorComponent from './error-component'
+import { apiEndPoints } from '../constants'
 
-interface PropsInterface {
-  selectedTask: Tasks
-}
-
-export default function ListContainer(props: PropsInterface) {
-  const { selectedTask } = props
-  const [listData, error, loading] = useApiGet<IResidentList & IProgramList>(
-    getApiForTask(selectedTask),
+export default function ListContainer() {
+  const [listData, error, loading] = useApiGet<IProgramList>(
+    apiEndPoints.WELBI_PROGRAM_LIST,
   )
+
+  if (loading) {
+    return <CircularProgress className="loaderClass" />
+  }
+  if (error) {
+    return <ErrorComponent error={error} />
+  }
 
   if (loading) {
     return <CircularProgress className={Styles.loaderClass} />
@@ -29,7 +30,6 @@ export default function ListContainer(props: PropsInterface) {
         <ListElement
           key={listItem.id}
           name={listItem.name}
-          room={listItem.room}
           location={listItem.location}
           attendance={listItem.attendance}
         />

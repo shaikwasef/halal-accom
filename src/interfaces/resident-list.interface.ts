@@ -18,17 +18,3 @@ export enum Status {
 	DECLINED = "Declined",
 	UNDEFINED = "Undefined"
 }
-
-export enum LevelOfCare {
-	INDEPENDENT = "INDEPENDENT",
-	ASSISTED = "ASSISTED",
-	MEMORY = "MEMORY",
-	LONGTERM = "LONGTERM"
-}
-
-export enum Ambulation {
-	NOLIMITATIONS = "NOLIMITATIONS",
-	CANE = "CANE",
-	WALKER = "WALKER",
-	WHEELCHAIR = "WHEELCHAIR"
-}

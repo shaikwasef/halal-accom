@@ -1,5 +1,4 @@
-import ApplicationTaskButtons from './application-task-buttons'
+import ListContainer from './attendee-list-container'
 import ErrorComponent from './error-component'
-import SelectedComponent from './selected-component'
 
-export { ErrorComponent, ApplicationTaskButtons, SelectedComponent }
+export { ErrorComponent, ListContainer }

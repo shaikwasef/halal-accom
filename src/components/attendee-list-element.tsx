@@ -8,21 +8,16 @@ interface PropsInterface {
   name: string
   attendance: Array<IResident>
   location?: string
-  room?: string
 }
 
 export default function ListElement(props: PropsInterface) {
-  const { name, attendance, room, location } = props
+  const { name, attendance, location } = props
   return (
     <Card className={Styles.listElement}>
       <CardContent>
         <Typography variant="h5">Name : {name}</Typography>
         <div className={Styles.listInfo}>
-          {location ? (
-            <Typography>Location : {location ? location : '-'}</Typography>
-          ) : (
-            <Typography>Room : {room ? room : '-'}</Typography>
-          )}
+          <Typography>Location : {location ? location : '-'}</Typography>
           <Typography>Attendance : {attendance.length}</Typography>
         </div>
       </CardContent>
