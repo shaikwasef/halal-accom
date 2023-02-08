@@ -1,28 +1,39 @@
 import Styles from '../Styles/components/list-container.module.scss'
 import useApiGet from '../helpers/hooks/use-api-get'
 import ListElement from './attendee-list-element'
-import { IProgramList } from '../interfaces'
+import { IApiError, IProgramList, IResidentList } from '../interfaces'
 import CircularProgress from '@mui/material/CircularProgress'
 import ErrorComponent from './error-component'
 import { apiEndPoints } from '../constants'
 
 export default function ListContainer() {
-  const [listData, error, loading] = useApiGet<IProgramList>(
-    apiEndPoints.WELBI_PROGRAM_LIST,
-  )
+  const [programData, programDataError, programApiloading] = useApiGet<
+    IProgramList
+  >(apiEndPoints.WELBI_PROGRAM_LIST)
 
-  if (loading) {
+  const [residentData, residentApiError, residentApiLoading] = useApiGet<
+    IResidentList
+  >(apiEndPoints.WELBI_RESIDENT_LIST)
+
+  if (programApiloading || residentApiLoading) {
     return <CircularProgress className="loaderClass" />
   }
-  if (error) {
-    return <ErrorComponent error={error} />
+  if (programDataError || residentApiError) {
+    return (
+      <ErrorComponent
+        error={
+          programDataError ? programDataError : (residentApiError as IApiError)
+        }
+      />
+    )
   }
 
   return (
     <div className={Styles.listContainer}>
-      {listData.map((listItem) => (
+      {programData.map((listItem) => (
         <ListElement
           key={listItem.id}
+          residentList={residentData}
           name={listItem.name}
           location={listItem.location}
           attendance={listItem.attendance}
